@@ -9,7 +9,7 @@ export const Colors = {
     successD:   '#008639',
     successM:   '#05AC4B',
     successL:   '#E6F1EB',
-    warningD:   '#A44F00',
+    warningD:   '#F07400',
     warningM:   '#D88100',
     warningL:   '#FDF3E7',
     errorD:     '#D40000',
