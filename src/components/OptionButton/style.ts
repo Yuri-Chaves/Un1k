@@ -5,7 +5,7 @@ export const Container = styled.Pressable`
     width: 100px;
     height: 100px;
     border-radius: 8px;
-    border-width: 5px;
+    border-width: 4px;
     border-style: solid;
     border-color: ${Colors.primary};
     background-color: ${Colors.secondary};
