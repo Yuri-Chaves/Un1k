@@ -2,8 +2,8 @@ import styled from 'styled-components/native'
 import { Colors } from '../../helpers/Colors'
 
 export const Container = styled.Pressable`
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     border-radius: 8px;
     border-width: 4px;
     border-style: solid;
@@ -13,6 +13,4 @@ export const Container = styled.Pressable`
     justify-content: center;
 `
 export const Image = styled.Image`
-    width: 80px;
-    height: 80px;
 `
