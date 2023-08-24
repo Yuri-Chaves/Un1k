@@ -45,6 +45,9 @@ export const FlatListContainer = styled.View`
     width: 100%;
     margin-top: 16px;
     padding: 0px 16px;
+    position: absolute;
+    left: 0;
+    top: 125px;
 `
 export const Separator = styled.View`
     width: 100%;
