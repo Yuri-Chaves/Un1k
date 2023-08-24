@@ -22,9 +22,9 @@ export default function Home() {
                 <OptionButton
                     source={require('../../../assets/iconCart.png')}
                 />
-                <OptionButton
+                {/* <OptionButton
                     source={require('../../../assets/iconCalendar.png')}
-                />
+                /> */}
             </ButtonsContainer>
         </Container>
     )
