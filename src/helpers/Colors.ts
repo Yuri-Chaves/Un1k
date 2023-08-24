@@ -21,7 +21,7 @@ export const Colors = {
     aux2D:      '#A83200',
     aux2M:      '#EE6005',
     aux2L:      '#FFEFE7',
-    bg:         '#1D1B23',
+    bg:         '#332A3B',
     grey0:      '#18191A',
     grey1:      '#333333',
     grey2:      '#4F4F4F',
