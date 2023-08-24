@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from 'react';
+import React, { ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../helpers/Colors';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -13,12 +13,13 @@ export const BottomSheetComponent = React.forwardRef<BottomSheetMethods, BottomS
     (
         { children }: BottomSheetInterface,
         ref: React.ForwardedRef<BottomSheetMethods>
-    ): JSX.Element =>{
+    ): JSX.Element => {
         return (
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <BottomSheet
                     ref={ref}
                     index={0}
+                    style={{width:'100%'}}
                     snapPoints={[24, '35%']}
                     handleStyle={{ backgroundColor: Colors.secondary, borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
                     handleIndicatorStyle={{ backgroundColor: Colors.white, width: '35%' }}
@@ -32,12 +33,6 @@ export const BottomSheetComponent = React.forwardRef<BottomSheetMethods, BottomS
     }
 )
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.bg,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     bottomContainer: {
         backgroundColor: Colors.alt1,
         flex: 1,
