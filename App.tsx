@@ -9,7 +9,7 @@ export default function App() {
   return (
       <NavigationContainer>
           <Routes />
-          <StatusBar backgroundColor={Colors.primary} style={'inverted'} translucent={false} />
+          <StatusBar backgroundColor={Colors.secondary} style={'inverted'} translucent={false} />
       </NavigationContainer>
   );
 }
