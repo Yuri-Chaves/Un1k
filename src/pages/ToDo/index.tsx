@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { FlatList, Dimensions } from 'react-native'
+import { Dimensions } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler';
 
 import { Colors } from '../../helpers/Colors'
 import { BottomSheetComponent } from '../../components/BottomSheet'
