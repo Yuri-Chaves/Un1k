@@ -21,6 +21,7 @@ export default function Home() {
                 />
                 <OptionButton
                     source={require('../../../assets/iconCart.png')}
+                    onPress={() => navigation.navigate('Shopping')}
                 />
                 {/* <OptionButton
                     source={require('../../../assets/iconCalendar.png')}
