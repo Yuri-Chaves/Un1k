@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4",
+    "@nozbe/watermelondb": "^0.26.0",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
     "expo": "~49.0.8",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@babel/plugin-proposal-decorators": "^7.22.10",
     "@types/react": "~18.0.14",
     "typescript": "^5.1.3"
   },
