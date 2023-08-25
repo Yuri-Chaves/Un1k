@@ -1,16 +1,17 @@
-import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { ReactNode, RefObject } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
 import { Colors } from '../../helpers/Colors';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 
 interface BottomSheetInterface {
     children: ReactNode
+    textInputRef?: RefObject<TextInput>
 }
 
 export const BottomSheetComponent = React.forwardRef<BottomSheetMethods, BottomSheetInterface>(
     (
-        { children }: BottomSheetInterface,
+        { children, textInputRef }: BottomSheetInterface,
         ref: React.ForwardedRef<BottomSheetMethods>
     ): JSX.Element => {
         return (
@@ -21,6 +22,18 @@ export const BottomSheetComponent = React.forwardRef<BottomSheetMethods, BottomS
                 snapPoints={[24, '35%']}
                 handleStyle={{ backgroundColor: Colors.secondary, borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
                 handleIndicatorStyle={{ backgroundColor: Colors.white, width: '35%' }}
+                onChange={(e) =>{
+                    if (e == 0){
+                        if(textInputRef){
+                            textInputRef?.current?.blur()
+                        }
+                    }
+                    if (e > 0){
+                        if(textInputRef){
+                            textInputRef?.current?.focus()
+                        }
+                    }
+                }}
             >
                 <View style={styles.bottomContainer}>
                     {children}
