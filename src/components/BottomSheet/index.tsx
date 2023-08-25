@@ -1,5 +1,5 @@
 import React, { ReactNode, RefObject } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import { Colors } from '../../helpers/Colors';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { BottomSheetMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
@@ -22,14 +22,12 @@ export const BottomSheetComponent = React.forwardRef<BottomSheetMethods, BottomS
                 snapPoints={[24, '35%']}
                 handleStyle={{ backgroundColor: Colors.secondary, borderTopRightRadius: 12, borderTopLeftRadius: 12 }}
                 handleIndicatorStyle={{ backgroundColor: Colors.white, width: '35%' }}
-                onChange={(e) =>{
-                    if (e == 0){
-                        if(textInputRef){
-                            textInputRef?.current?.blur()
-                        }
+                onChange={(e) => {
+                    if (e == 0) {
+                        Keyboard.dismiss()
                     }
-                    if (e > 0){
-                        if(textInputRef){
+                    if (e > 0) {
+                        if (textInputRef) {
                             textInputRef?.current?.focus()
                         }
                     }
