@@ -4,11 +4,11 @@ export const ShoppItemSchema = tableSchema({
     name: 'itens_compras',
     columns: [
         {
-            name: 'Item',
-            type:'string'
+            name: 'title',
+            type: 'string'
         },
         {
-            name: 'prioridade',
+            name: 'priority',
             type: "string"
         },
         {

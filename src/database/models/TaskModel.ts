@@ -4,11 +4,11 @@ import { field } from "@nozbe/watermelondb/decorators"
 export class TaskModel extends Model {
     static table = 'tarefas'
 
-    @field('tarefa')
-    tarefa!: string
+    @field('title')
+    title!: string;
 
-    @field('prioridade')
-    prioridade!: string
+    @field('priority')
+    priority!: string;
 
     @field('check')
     check!: boolean

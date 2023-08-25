@@ -4,11 +4,11 @@ export const TaskSchema = tableSchema({
     name: 'tarefas',
     columns: [
         {
-            name: 'tarefa',
+            name: 'title',
             type: 'string'
         },
         {
-            name: 'prioridade',
+            name: 'priority',
             type: "string"
         },
         {
