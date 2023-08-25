@@ -10,6 +10,7 @@ export const TaskContainer = styled.Pressable`
     gap: 8px;
     width: 92%;
     padding: 16px 16px;
+    padding-right: 30px;
     border-radius: 8px 0px 0px 8px;
     align-items: flex-start;
     border-width: 2px;

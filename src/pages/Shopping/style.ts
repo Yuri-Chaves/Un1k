@@ -43,7 +43,7 @@ export const Text = styled.Text<TextProps>`
 `
 export const FlatListContainer = styled.View`
     width: 100%;
-    margin-top: 16px;
+    margin-top: 24px;
     padding: 0px 16px;
     position: absolute;
     left: 0;
