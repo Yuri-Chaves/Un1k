@@ -1,15 +1,17 @@
-import { useRef, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Dimensions } from 'react-native'
+
 import { FlatList } from 'react-native-gesture-handler';
 
 import { Colors } from '../../helpers/Colors'
+
 import { BottomSheetComponent } from '../../components/BottomSheet'
 import { ListItem } from '../../components/ListItem'
+import { AddItemForm } from '../../components/forms/AddItem';
 
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigatorPages } from "../../routes/app.routes";
 import { StackNavigationProp } from '@react-navigation/stack'
-import { AddItemForm } from '../../components/forms/AddItem';
 
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 
@@ -23,13 +25,17 @@ import {
     Separator
 } from './style'
 
-import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
+import { DBContext } from '../../contexts/DBContext';
 
 export default function ToDo() {
     const windowHeight = Dimensions.get('window').height;
     const listHeight = windowHeight - 204
     const navigation = useNavigation<StackNavigationProp<StackNavigatorPages>>()
-    const bottomSheetRef = useRef<BottomSheet>(null);
+    const { items, fetchData, bottomSheetRef, textInputRef } = useContext(DBContext)
+
+    useEffect(() => {
+        fetchData('TaskItem')
+    }, [])
 
     return (
         <Container>
@@ -62,19 +68,20 @@ export default function ToDo() {
                 style={{ height: listHeight }}
             >
                 <FlatList
-                    data={[]}
-                    keyExtractor={item => item}
+                    data={items}
+                    keyExtractor={item => item.id}
                     renderItem={({ item }) => (
-                        <ListItem text={item} priority={item} textDecoration dot />
+                        <ListItem item={item} type={'TaskItem'} textDecoration dot />
                     )}
                     ItemSeparatorComponent={() => <Separator />}
                 />
             </FlatListContainer>
             <BottomSheetComponent
                 ref={bottomSheetRef}
+                textInputRef={textInputRef}
             >
                 <AddItemForm
-                    onConfirm={() => bottomSheetRef.current?.collapse()}
+                    type={'TaskItem'}
                     placeholder="Não esqueça de conferir a prioridade..."
                 />
             </BottomSheetComponent>
