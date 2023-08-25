@@ -1,28 +1,70 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { TextInput } from "react-native"
+
+import { DBContext } from '../../../contexts/DBContext';
+
 import { Colors } from '../../../helpers/Colors'
+
 import {
     Container,
     PriorityContainer,
     PriorityButtonContainer,
     PriorityButton,
     Text,
-    Input,
     ConfirmButton
 } from './style'
 
-interface AddItemFormInterface{
+import { database } from '../../../database';
+import { ShoppItemModel } from '../../../database/models/ShoppItemModel';
+import { TaskModel } from '../../../database/models/TaskModel';
+
+interface AddItemFormInterface {
     placeholder?: string;
-    onConfirm: () => void;
+    type: "ShopItem" | "TaskItem"
 }
 
-export function AddItemForm({placeholder, onConfirm}: AddItemFormInterface) {
-    const [priority, setPriority] = useState<"low" | "normal" | "high">("normal")
-    const [task, setTask] = useState('')
+export function AddItemForm({ placeholder, type }: AddItemFormInterface) {
+    const { fetchData, item, bottomSheetRef, textInputRef, callEdit, setCallEdit } = useContext(DBContext)
+    const [priority, setPriority] = useState<string>("normal")
+    const [title, setTitle] = useState('')
+    useEffect(() => {
+        if (callEdit) {
+            setTitle(item.title ? item.title : '')
+            setPriority(item.priority ? item.priority : 'low')
+        }
+    }, [callEdit])
 
-    const addItem = () => {
-      setTask('')
-      setPriority("normal")
-      onConfirm()
+    async function addItem() {
+        const itemCollection = type == "ShopItem" ? database.get<ShoppItemModel>("itens_compras") : database.get<TaskModel>("tarefas")
+        if (title.length > 0) {
+            await database.write(async () => {
+                itemCollection.create(data => {
+                    data.title = title
+                    data.priority = priority
+                    data.check = false
+                })
+            })
+        }
+        fetchData(type)
+        setTitle('')
+        setPriority("normal")
+        bottomSheetRef.current?.collapse()
+    }
+    async function editItem() {
+        if (title.length > 0 && title != item.title || priority != item.priority) {
+            await database.write(async () => {
+                await item.update(data => {
+                    data.title = title
+                    data.priority = priority
+                    data.check = item.check
+                })
+            })
+            fetchData(type)
+        }
+        setCallEdit(false)
+        setTitle('')
+        setPriority("normal")
+        bottomSheetRef.current?.collapse()
     }
 
     return (
@@ -71,16 +113,28 @@ export function AddItemForm({placeholder, onConfirm}: AddItemFormInterface) {
                     </PriorityButton>
                 </PriorityButtonContainer>
             </PriorityContainer>
-            <Input
+            <TextInput
                 placeholder={placeholder}
                 placeholderTextColor={Colors.grey3}
-                value={task}
-                onChangeText={setTask}
+                value={title}
+                onChangeText={setTitle}
+                ref={textInputRef}
+                style={{
+                    backgroundColor: Colors.aux1L,
+                    borderRadius: 4,
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                    borderColor: Colors.aux1D,
+                    paddingVertical: 0,
+                    paddingHorizontal: 8,
+                    color: Colors.aux1D
+                }}
             />
             <ConfirmButton
-                onPress={addItem}
+                onPress={callEdit ? editItem : addItem}
+                style={{ backgroundColor: callEdit ? '#4BC3A4' : Colors.successD }}
             >
-                <Text>Adicionar</Text>
+                <Text>{callEdit ? 'Editar' : 'Adicionar'}</Text>
             </ConfirmButton>
         </Container>
     )

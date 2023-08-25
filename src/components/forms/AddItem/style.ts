@@ -32,19 +32,11 @@ export const Text = styled.Text`
     font-size: 14px;
     color: ${Colors.white};
 `
-export const Input = styled.TextInput`
-    background-color: ${Colors.aux1L};
-    border-radius: 4px;
-    border: 1px solid ${Colors.aux1D};
-    padding: 0px 8px;
-    color: ${Colors.aux1D};
-`
 export const ConfirmButton = styled.Pressable`
     width: 35%;
     align-self: flex-end;
     align-items: center;
     justify-content: center;
     height: 30px;
-    background-color: ${Colors.successD};
     border-radius: 4px;
 `
