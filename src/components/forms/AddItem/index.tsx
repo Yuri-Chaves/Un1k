@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { TextInput } from "react-native"
+import { Keyboard, TextInput } from "react-native"
 
 import { DBContext } from '../../../contexts/DBContext';
 
@@ -35,6 +35,7 @@ export function AddItemForm({ placeholder, type }: AddItemFormInterface) {
     }, [callEdit])
 
     async function addItem() {
+        Keyboard.dismiss()
         const itemCollection = type == "ShopItem" ? database.get<ShoppItemModel>("itens_compras") : database.get<TaskModel>("tarefas")
         if (title.length > 0) {
             await database.write(async () => {
@@ -51,6 +52,7 @@ export function AddItemForm({ placeholder, type }: AddItemFormInterface) {
         bottomSheetRef.current?.collapse()
     }
     async function editItem() {
+        Keyboard.dismiss()
         if (title.length > 0 && title != item.title || priority != item.priority) {
             await database.write(async () => {
                 await item.update(data => {
